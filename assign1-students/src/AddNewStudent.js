@@ -7,7 +7,7 @@ function App() {
   const [address, setAddress] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
   const [email, setEmail] = useState('');
-  const endPoint = 'https://localhost:8080/api/a1/student'
+  const endPoint = "http://localhost:8080/api/a1/student"
   const save = () => {
     fetch(endPoint, {
       method: 'POST',
