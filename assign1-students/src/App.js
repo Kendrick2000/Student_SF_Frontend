@@ -1,30 +1,21 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 function App() {
-  const [name, setName] = useState('');
-  const [parentName, setParentName] = useState('');
-  const [address, setAddress] = useState('');
-  const [phoneNum, setPhoneNum] = useState('');
-  const [email, setEmail] = useState('');
-  const endPoint = 'https://localhost:8080/api/a1/student'
-  const save = () => {
-    fetch(endPoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({first_name: name, parent_name: parentName, address: address, phone_number: phoneNum, email: email})
-    }).then(data => data.json)
-  }
+  const [data, setData] = useState([]);
+  const endPoint = "http://localhost:8080/api/a1/student"
+  useEffect(() => {
+    fetch(endPoint)
+      .then(response => response.json())
+      .then(data => setData(data));
+  });
   return (
-    <div className="form">
-      Name:<input type="text" value={name} onChange={(e)=>setName(e.target.value)} />
-      Parent Name:<input type="text" value={parentName} onChange={(e)=>setParentName(e.target.value)} />
-      Address:<input type="text" value={address} onChange={(e)=>setAddress(e.target.value)} />
-      Phone Number:<input type="text" value={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)} />
-      Email:<input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} />
-      <button onClick={() => save()}>Save</button>
+    <div className="table">
+      <ul>
+        {data.map(el => (
+          <li key={el.id}>{el.name}</li>
+        ))}
+      </ul> 
     </div>
   );
 }
