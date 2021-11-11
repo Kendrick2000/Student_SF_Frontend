@@ -1,39 +1,74 @@
 import './App.css';
-import React, {useState} from 'react';
-<<<<<<< HEAD
-import StudentComponent from './StudentComponent';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+
+const STUDENT_API_URL = 'http://localhost:8080/api/a1/student';
+
+const StudentProfiles = () => {
+  const [studentProfiles, setStudentProfiles] = useState([]);
+
+  const fetchForApi = () => {
+    axios.get(STUDENT_API_URL).then((rsp) => {
+      console.log(rsp.data);
+      setStudentProfiles(rsp.data);
+    });
+  };
+
+  const addNewStudent = (id) =>{
+    axios.post(STUDENT_API_URL, {
+      
+    })
+  } 
+  
+  useEffect(() => {
+    fetchForApi();
+  }, []);
+
+  return (
+    <div className="container">
+      <h1>List of Sutdent</h1>
+      <hr/>
+      <div>
+        <table className="table table-border">
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>First Name</td>
+              <td>Last Name</td>
+              <td>Address</td>
+              <td>Phone Number</td>
+              <td>Email</td>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              studentProfiles.map(studentProfiles => (
+                <tr key={studentProfiles.id}>
+                  <td>{studentProfiles.id}</td>
+                  <td>{studentProfiles.name}</td>
+                  <td>{studentProfiles.parentName}</td>
+                  <td>{studentProfiles.address}</td>
+                  <td>{studentProfiles.phoneNum}</td>
+                  <td>{studentProfiles.email}</td>
+                  <td>
+                    <button className="btn btn-danger ml-2" onClick={() => {
+                      deletStudent(studentProfiles.id);
+                    }} >Delete</button>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+};
 
 function App() {
   return(
     <div className="App">
-      <StudentComponent/>
-=======
-
-function App() {
-  const [name, setName] = useState('');
-  const [parentName, setParentName] = useState('');
-  const [address, setAddress] = useState('');
-  const [phoneNum, setPhoneNum] = useState('');
-  const [email, setEmail] = useState('');
-  const endPoint = 'https://localhost:8080/api/a1/student'
-  const save = () => {
-    fetch(endPoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({first_name: name, parent_name: parentName, address: address, phone_number: phoneNum, email: email})
-    }).then(data => data.json)
-  }
-  return (
-    <div className="form">
-      Name:<input type="text" value={name} onChange={(e)=>setName(e.target.value)} />
-      Parent Name:<input type="text" value={parentName} onChange={(e)=>setParentName(e.target.value)} />
-      Address:<input type="text" value={address} onChange={(e)=>setAddress(e.target.value)} />
-      Phone Number:<input type="text" value={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)} />
-      Email:<input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} />
-      <button onClick={() => save()}>Save</button>
->>>>>>> parent of 082afea (Saving student)
+      <StudentProfiles/>
     </div>
   );
 }
