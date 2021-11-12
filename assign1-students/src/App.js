@@ -1,74 +1,46 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import AddNewStudent from "./AddNewStudent";
-
-const STUDENT_API_URL = 'http://localhost:8080/api/a1/student';
-
-const StudentProfiles = () => {
-  const [studentProfiles, setStudentProfiles] = useState([]);
-
-  const fetchForApi = () => {
-    axios.get(STUDENT_API_URL).then((rsp) => {
-      console.log(rsp.data);
-      setStudentProfiles(rsp.data);
-    });
-  };
-  
-  useEffect(() => {
-    fetchForApi();
-  }, []);
-
-  return (
-    <Router>
-      <div className="container">
-        <h1>List of Sutdent</h1>
-        <hr/>
-        <div>
-          <table className="table table-border">
-            <thead>
-              <tr>
-                <td>ID</td>
-                <td>First Name</td>
-                <td>Last Name</td>
-                <td>Address</td>
-                <td>Phone Number</td>
-                <td>Email</td>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                studentProfiles.map(studentProfiles => (
-                  <tr key={studentProfiles.id}>
-                    <td>{studentProfiles.id}</td>
-                    <td>{studentProfiles.name}</td>
-                    <td>{studentProfiles.parentName}</td>
-                    <td>{studentProfiles.address}</td>
-                    <td>{studentProfiles.phoneNum}</td>
-                    <td>{studentProfiles.email}</td>
-                  </tr>
-                ))
-              }
-            </tbody>
-          </table>
-          <div>
-            <Routes>
-              <Route exact path='/AddNewStudent' component={AddNewStudent}/>
-            </Routes>
-          </div>
-        </div>
-      </div>
-    </Router>
-  )
-};
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Read from './Components/read';
+import Create from './Components/create';
+import Update from './Components/update';
 
 function App() {
   return(
-    <div className="App">
-      <StudentProfiles/>
-    </div>
+    // <div className="App">
+    //   <div className="main">
+    //     <h2 className="main-header">Student Management</h2>
+    //     <div>
+    //       <Create/>
+    //     </div>
+    //     <div>
+    //       <Read/>
+    //     </div>
+    //   </div>
+    // </div>
+    <Router>
+      <div>
+        <nav> 
+          <ul> 
+            {/* <li> 
+              <Link to="/">Home</Link> 
+            </li>  */}
+            <li> 
+              <Link to="/create">Create Student</Link> 
+            </li> 
+            {/* <li>
+              <Link to="/update">Update</Link>
+            </li> */}
+          </ul> 
+        </nav>
+        <Routes>
+          {/* <Route path="/" element={<Read/>}></Route> */}
+          <Route path="/create" element={<Create/>}></Route>
+          {/* <Route path="/update" element={<Update/>}></Route> */}
+        </Routes>
+        <Read/>
+      </div>
+    </Router>
   );
 }
-
 export default App;
