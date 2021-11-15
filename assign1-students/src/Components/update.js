@@ -30,7 +30,7 @@ export default function Update(){
     }, []);
 
     return(
-        <form>
+        <form className="create-form">
             <label>Student ID</label>
             <input placeholder='ID' onChange={(e) => setID(e.target.value)} />
             <label>First Name</label>

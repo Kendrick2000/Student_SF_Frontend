@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -18,7 +19,7 @@ export default function Create() {
     }
 
     return(
-        <form>
+        <form className="create-form">
             <label>First Name</label>
             <input placeholder='First Name' onChange={(e) => setName(e.target.value)} />
             <label>Last Name</label>
