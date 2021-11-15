@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Update from './update';
 
 const STUDENT_API_URL = 'http://localhost:8080/api/a1/student';
 
@@ -72,9 +71,9 @@ export default function StudentProfiles (){
                         <button onClick={() => onDelete(studentProfiles.id)}>Delete</button>
                     </td>
                     <Link to='/update'>
-                        <td>
-                            <button type="submit" onClick={() => setData(studentProfiles)}>Update</button>
-                        </td>
+                      <td>
+                        <button type="submit" onClick={() => setData(studentProfiles)}>Update</button>
+                      </td>
                     </Link>
                   </tr>
                 ))

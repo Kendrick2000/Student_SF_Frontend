@@ -22,16 +22,16 @@ export default function Update(){
 
     useEffect(() => {
         setID(localStorage.getItem('ID'));
-        setName(localStorage.getItem('First Name'));
-        setParentName(localStorage.getItem('Last Name'));
-        setAddress(localStorage.getItem('Address'));
-        setPhoneNum(localStorage.getItem('Phone Number'));
-        setEmail(localStorage.getItem('Email'));
+        setName(localStorage.getItem('name'));
+        setParentName(localStorage.getItem('parentName'));
+        setAddress(localStorage.getItem('address'));
+        setPhoneNum(localStorage.getItem('phoneNum'));
+        setEmail(localStorage.getItem('email'));
     }, []);
 
     return(
         <form className="create-form">
-            <label>Student ID</label>
+            <label>ID</label>
             <input placeholder='ID' onChange={(e) => setID(e.target.value)} />
             <label>First Name</label>
             <input placeholder='First Name' onChange={(e) => setName(e.target.value)} />
@@ -43,7 +43,7 @@ export default function Update(){
             <input placeholder='Phone Number' onChange={(e) => setPhoneNum(e.target.value)}/>
             <label>Email</label>
             <input placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
-            <button type="submit" onClick={UpdateAPIData}>Add New Student</button>
+            <button type='submit' onClick={UpdateAPIData}>Update Student</button>
         </form>
     )
 }
