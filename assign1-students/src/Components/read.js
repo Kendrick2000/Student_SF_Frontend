@@ -9,7 +9,7 @@ export default function ProductProfiles (){
   const fetchForApi = () => {
     axios.get(PRODUCT_API_URL).then((rsp) => {
       console.log(rsp.data);
-      setStudentProfiles(rsp.data);
+      setProductProfiles(rsp.data);
     });
   };
 
