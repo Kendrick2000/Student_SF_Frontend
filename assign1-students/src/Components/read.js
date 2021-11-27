@@ -2,39 +2,40 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const STUDENT_API_URL = 'http://localhost:8080/api/a1/student';
+const PRODUCT_API_URL = 'http://localhost:8080/api/v1/product';
 
-export default function StudentProfiles (){
-  const [studentProfiles, setStudentProfiles] = useState([]);
+export default function ProductProfiles (){
+  const [productProfiles, setProductProfiles] = useState([]);
   const fetchForApi = () => {
-    axios.get(STUDENT_API_URL).then((rsp) => {
+    axios.get(PRODUCT_API_URL).then((rsp) => {
       console.log(rsp.data);
       setStudentProfiles(rsp.data);
     });
   };
 
   const getData = () => {
-      axios.get(`http://localhost:8080/api/a1/student`)
+      axios.get(`http://localhost:8080/api/v1/product`)
       .then((getData) => {
-          setStudentProfiles(getData.data);
+          setProductProfiles(getData.data);
       })
   }
   
   const onDelete = (id) => {
-      axios.delete(`http://localhost:8080/api/a1/student/${id}`)
+      axios.delete(`http://localhost:8080/api/v1/product/${id}`)
       .then(() => {
           getData();
       })
   }
 
   const setData = (data) => {
-        let {id, name, parentName, address, phoneNum, email } = data;
+        let {id, productName, series, type, price, description,rating } = data;
         localStorage.setItem('ID', id);
-        localStorage.setItem('name', name);
-        localStorage.setItem('parentName', parentName);
-        localStorage.setItem('address', address);
-        localStorage.setItem('phoneNum', phoneNum);
-        localStorage.setItem('email', email);
+        localStorage.setItem('productName', productName);
+        localStorage.setItem('series', series);
+        localStorage.setItem('type', type);
+        localStorage.setItem('price', price);
+        localStorage.setItem('description', description);
+        localStorage.setItem('rating',rating);
   }
 
   useEffect(() => {
@@ -43,36 +44,38 @@ export default function StudentProfiles (){
 
   return (
       <div className="container">
-        <h1>List of Students</h1>
+        <h1>List of Product</h1>
         <hr/>
         <div>
           <table className="table table-border">
             <thead>
               <tr>
                 <td>ID</td>
-                <td>First Name</td>
-                <td>Last Name</td>
-                <td>Address</td>
-                <td>Phone Number</td>
-                <td>Email</td>
+                <td>Product Name</td>
+                <td>Series</td>
+                <td>Type</td>
+                <td>Price</td>
+                <td>Description</td>
+                <td>Rating</td>
               </tr>
             </thead>
             <tbody>
               {
-                studentProfiles.map(studentProfiles => (
-                  <tr key={studentProfiles.id}>
-                    <td>{studentProfiles.id}</td>
-                    <td>{studentProfiles.name}</td>
-                    <td>{studentProfiles.parentName}</td>
-                    <td>{studentProfiles.address}</td>
-                    <td>{studentProfiles.phoneNum}</td>
-                    <td>{studentProfiles.email}</td>
+                productProfiles.map(productProfiles => (
+                  <tr key={productProfiles.id}>
+                    <td>{productProfiles.id}</td>
+                    <td>{productProfiles.productName}</td>
+                    <td>{productProfiles.series}</td>
+                    <td>{productProfiles.type}</td>
+                    <td>{productProfiles.price}</td>
+                    <td>{productProfiles.description}</td>
+                    <td>{productProfiles.rating}</td>
                     <td>
-                        <button onClick={() => onDelete(studentProfiles.id)}>Delete</button>
+                        <button onClick={() => onDelete(ProductProfiles.id)}>Delete</button>
                     </td>
                     <Link to='/update'>
                       <td>
-                        <button type="submit" onClick={() => setData(studentProfiles)}>Update</button>
+                        <button type="submit" onClick={() => setData(ProductProfiles)}>Update</button>
                       </td>
                     </Link>
                   </tr>
