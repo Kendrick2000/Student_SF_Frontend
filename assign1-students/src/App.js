@@ -8,23 +8,12 @@ import Find from './Components/find';
 
 function App() {
   return(
-    // <div className="App">
-    //   <div className="main">
-    //     <h2 className="main-header">Student Management</h2>
-    //     <div>
-    //       <Create/>
-    //     </div>
-    //     <div>
-    //       <Read/>
-    //     </div>
-    //   </div>
-    // </div>
     <Router>
       <div>
         <nav> 
           <ul> 
             <li> 
-              <Link to="/create">Create Student</Link> 
+              <Link to="/create">Create Product</Link> 
             </li> 
           </ul> 
         </nav>

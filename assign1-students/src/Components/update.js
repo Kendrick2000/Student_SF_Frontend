@@ -22,12 +22,6 @@ export default function Update(){
     }
 
     useEffect(() => {
-        // setID(localStorage.getItem('ID'));
-        // setName(localStorage.getItem('name'));
-        // setParentName(localStorage.getItem('parentName'));
-        // setAddress(localStorage.getItem('address'));
-        // setPhoneNum(localStorage.getItem('phoneNum'));
-        // setEmail(localStorage.getItem('email'));
         setID(localStorage.getItem('ID'));
         setProductName(localStorage.getItem('productName'));
         setSeries(localStorage.getItem('series'));
